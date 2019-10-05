@@ -10,6 +10,10 @@ public class DriveToPositionCommand extends BaseCommand {
 
     DriveSubsystem drive;
     PoseSubsystem pose;
+    public double target;
+    public double currentPosition;
+    public double velocityPosition;
+
     
     @Inject
     public DriveToPositionCommand(DriveSubsystem driveSubsystem, PoseSubsystem pose) {
@@ -18,6 +22,7 @@ public class DriveToPositionCommand extends BaseCommand {
     }
     
     public void setTargetPosition(double position) {
+        target = position;
         // This method will be called by the test, and will give you a goal distance.
         // You'll need to remember this target position and use it in your calculations.
     }
@@ -29,6 +34,10 @@ public class DriveToPositionCommand extends BaseCommand {
 
     @Override
     public void execute() {
+        currentPosition = pose.getPosition();
+        this.velocityPosition = target - currentPosition;
+        power = (target - currentPosition)/target; 
+
         // Here you'll need to figure out a technique that:
         // - Gets the robot to move to the target position 
         // - Hint: use pose.getPosition() to find out where you are

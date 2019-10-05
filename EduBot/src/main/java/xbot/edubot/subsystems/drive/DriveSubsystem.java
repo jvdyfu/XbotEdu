@@ -16,6 +16,10 @@ public class DriveSubsystem extends BaseSubsystem {
     public XCANTalon frontRight;
     public XCANTalon rearLeft;
     public XCANTalon rearRight;
+    public double power = 1;
+    public boolean toggle; 
+
+    
         
     @Inject
     public DriveSubsystem(CommonLibFactory factory) {
@@ -30,9 +34,24 @@ public class DriveSubsystem extends BaseSubsystem {
         // You'll need to take these power values and assign them to all of the motors. As
         // an example, here is some code that has the frontLeft motor to spin according to
         // the value of leftPower:
-        frontLeft.simpleSet(leftPower, rightPower);
-        rearLeft.simpleSet(leftPower, rightPower);
-        frontRight.simpleSet(leftPower, rightPower);
-        rearRight.simpleSet(leftPower, rightPower);
+        frontLeft.simpleSet(leftPower * power);
+        rearLeft.simpleSet(leftPower * power);
+        frontRight.simpleSet(rightPower * power);
+        rearRight.simpleSet(rightPower * power);
+    }
+
+    
+
+    public void TogglePositionMode() {
+        if (toggle) {
+            power = 1.0;
+            toggle = false;
+        }
+        else {
+            power = 0.5;
+            toggle = true;
+        }
+
+
     }
 }
