@@ -30,6 +30,9 @@ public class DriveSubsystem extends BaseSubsystem {
         // You'll need to take these power values and assign them to all of the motors. As
         // an example, here is some code that has the frontLeft motor to spin according to
         // the value of leftPower:
-        frontLeft.simpleSet(leftPower);
+        frontLeft.simpleSet(leftPower, rightPower);
+        rearLeft.simpleSet(leftPower, rightPower);
+        frontRight.simpleSet(leftPower, rightPower);
+        rearRight.simpleSet(leftPower, rightPower);
     }
 }
